@@ -8,7 +8,7 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
     /// <summary>
     /// Linear data structure (LIFO)
     /// </summary>
-    public class Stack<T> : IEnumerable
+    public class Stack<T> : IEnumerable<T>
     {
         T[] arr;
         int top; //top element
@@ -46,7 +46,7 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
 
         public bool IsFull()
         {
-            return top == capacity - 1;
+            return top == (capacity - 1);
         }
 
         public T Peek()
@@ -60,7 +60,7 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < capacity; i++)
+            for (int i = 0; i <= top; i++)
             {
                 yield return arr[i];
             }

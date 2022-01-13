@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using UnitTesting_Structures_Patterns.Structures.BasicStructures;
+using UnitTesting_Structures_Patterns.Structures.TreeBased;
 
 namespace UnitTesting_Structures_Patterns
 {
@@ -6,23 +9,20 @@ namespace UnitTesting_Structures_Patterns
     {
         static void Main(string[] args)
         {
-            
-            Structures.BasicStructures.CircularQueue<int> st1 = new Structures.BasicStructures.CircularQueue<int>(5);
-            st1.Enqueue(16);
-            st1.Enqueue(10);
-            st1.Enqueue(5);
-            st1.Enqueue(155);
-            st1.Enqueue(100);
-            foreach (int s in st1)
+            var heap = new MyHeap();
+
+            heap.Add(1);
+            heap.Add(2);
+            heap.Add(6);
+            heap.Add(8);
+            heap.Add(7);
+            heap.Add(8);
+            heap.Add(9);
+
+            heap.Poll();
+            foreach(var n in heap)
             {
-                Console.WriteLine(s + "   ");
-            }
-            st1.Dequeue();
-            st1.Enqueue(21);
-            foreach (int s in st1)
-            {
-                Console.WriteLine(s);
-                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(n);
             }
         }
     }

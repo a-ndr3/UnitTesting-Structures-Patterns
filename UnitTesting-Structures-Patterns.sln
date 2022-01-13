@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30218.91
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTesting-Structures-Patterns", "UnitTesting-Structures-Patterns\UnitTesting-Structures-Patterns.csproj", "{AFCEEB53-3172-402A-A11E-19F05690B0E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTesting-Structures-Patterns", "UnitTesting-Structures-Patterns\UnitTesting-Structures-Patterns.csproj", "{AFCEEB53-3172-402A-A11E-19F05690B0E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{4FE42AC4-A7C5-4DC9-91DE-3F17C2653B7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{4FE42AC4-A7C5-4DC9-91DE-3F17C2653B7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

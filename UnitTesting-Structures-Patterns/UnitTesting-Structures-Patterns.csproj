@@ -11,7 +11,6 @@
     <Folder Include="Structures\GraphBased\" />
     <Folder Include="Structures\Greedy\" />
     <Folder Include="Structures\Sorting-searching\" />
-    <Folder Include="Structures\TreeBased\" />
   </ItemGroup>
 
 </Project>
