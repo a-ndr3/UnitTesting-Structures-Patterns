@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnitTesting_Structures_Patterns.Interfaces;
 
 namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
 {
     /// <summary>
     /// An abstract data structure with FIFO rule
     /// </summary>
-    public class Queue<T> : IEnumerable
+    public class Queue<T> : ICustomCollection<T>
     {
         protected T[] arr;
         protected int front; //ref to the first element
@@ -99,6 +100,16 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public void Add(T data)
+        {
+            Enqueue(data);
+        }
+
+        public T Delete()
+        {
+            return Dequeue();
         }
     }
 

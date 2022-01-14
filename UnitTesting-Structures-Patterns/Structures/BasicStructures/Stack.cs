@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnitTesting_Structures_Patterns.Interfaces;
 
 namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
 {
     /// <summary>
     /// Linear data structure (LIFO)
     /// </summary>
-    public class Stack<T> : IEnumerable<T>
+    public class Stack<T> : IEnumerable<T>, ICustomCollection<T>
     {
         T[] arr;
         int top; //top element
@@ -71,7 +72,14 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
             return GetEnumerator();
         }
 
+        public void Add(T data)
+        {
+            Push(data);
+        }
+
+        public T Delete()
+        {
+            return Pop();
+        }
     }
-
-
 }

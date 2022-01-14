@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace UnitTesting_Structures_Patterns.Structures.TreeBased
 {
-    public class Node<T> : IEnumerable<T> where T:IComparable
+    public class Node<T> : IEnumerable<T> where T : IComparable
     {
         public T data;
         public Node<T> left, right;
@@ -82,34 +81,6 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
             root = new Node<T>(list);
         }
 
-        //public bool Compare<T>(T x, T y)
-        //{
-        //    return EqualityComparer<T>.Default.Equals(x, y);
-        //}
-
-        //public Node<T> DeleteNode(Node<T> currentNode, T data)
-        //{
-        //    if (this.root != null)
-        //    {
-        //        if (Compare(currentNode.data,data))
-        //        {
-        //            if (currentNode.left == null && currentNode.right == null)
-        //            {
-        //                return null;
-        //            }
-
-        //            if (currentNode.left == null)
-        //            {
-        //                return currentNode.right;
-        //            }
-
-        //            if (currentNode.right == null)
-        //            {
-        //                return currentNode.left;
-        //            }
-        //        }
-        //    }
-        //}
 
         public int CountNumNodes(Node<T> root)
         {
@@ -147,23 +118,3 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
 }
 
 
-
-//List<int> list = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 };
-//CompleteBinaryTree<int> tree = new CompleteBinaryTree<int>();
-////CompleteBinaryTree<int> tree = new CompleteBinaryTree<int>(list);
-
-//tree.root = new Node<int>(1);
-//tree.root.left = new Node<int>(2);
-////tree.root.right = new Node<int>(3);
-////tree.root.left.left = new Node<int>(4);
-////tree.root.left.right = new Node<int>(6);
-////tree.root.right.right = new Node<int>(5);
-////tree.root.right.left = new Node<int>(7);
-
-//var num = tree.CountNumNodes(tree.root);
-//var check = tree.CheckIfCompleteBinaryTree(tree.root, 0, num);
-
-//foreach (var n in tree)
-//{
-//    Console.WriteLine(n);
-//}

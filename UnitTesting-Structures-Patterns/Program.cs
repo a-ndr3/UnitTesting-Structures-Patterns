@@ -9,21 +9,26 @@ namespace UnitTesting_Structures_Patterns
     {
         static void Main(string[] args)
         {
-            var heap = new MyHeap();
+            var bst = new BST<int>();
 
-            heap.Add(1);
-            heap.Add(2);
-            heap.Add(6);
-            heap.Add(8);
-            heap.Add(7);
-            heap.Add(8);
-            heap.Add(9);
+            bst.Add(1);
+            bst.Add(7);
+            bst.Add(32);
+            bst.Add(3);
+            bst.Add(66);
+            bst.Add(5);
 
-            heap.Poll();
-            foreach(var n in heap)
-            {
-                Console.WriteLine(n);
-            }
+            bst.TraversePreOrder(bst.root);
+            bst.TraverseInOrder(bst.root);
+            bst.TraversePostOrder(bst.root);
+
+            bst.Remove(234);
+
+            bst.TraverseInOrder(bst.root);
+            bst.Remove(5);
+
+            bst.TraverseInOrder(bst.root);
+
         }
     }
 }

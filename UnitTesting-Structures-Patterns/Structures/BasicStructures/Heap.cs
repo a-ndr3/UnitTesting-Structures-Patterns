@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
 {
@@ -157,7 +154,7 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
         private void HeapifyUp()
         {
             int index = size - 1;
-            
+
             while (HasParent(index) && Parent(index) > arr[index])
             {
                 Swap(GetParentIndex(index), index);
@@ -171,6 +168,11 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
             {
                 yield return arr[i];
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
