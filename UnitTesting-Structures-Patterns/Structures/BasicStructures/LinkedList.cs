@@ -72,6 +72,11 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
                 next = null;
             }
         }
+
+        public LinkedList()
+        {
+            this.root = null;
+        }
         public LinkedList(T value)
         {
             Add(root, value);
@@ -294,6 +299,266 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
             {
                 yield return item;
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DoubleLinkedList<T> : ICustomCollection<T> where T : IComparable<T>
+    {
+        public Node root;
+        public class Node
+        {
+            public T value;
+            public Node next;
+            public Node previous;
+
+            public Node(T value)
+            {
+                this.value = value;
+                next = null;
+                previous = null;
+            }
+        }
+
+        public DoubleLinkedList()
+        {
+            this.root = null;
+        }
+        public DoubleLinkedList(T value)
+        {
+            Add(value);
+        }
+
+        public void AddToTheStart(T value)
+        {
+            var oldroot = this.root;
+            this.root = new Node(value);
+            this.root.next = oldroot;
+            oldroot.previous = this.root;
+        }
+
+        /// <summary>
+        /// Add element to double linked list (in the "end")
+        /// </summary>
+        /// <param name="data"></param>
+        public void Add(T data)
+        {
+            if (this.root == null)
+            {
+                this.root = new Node(data);
+            }
+            else
+            {
+                Node ptr = this.root;
+                Node prev = this.root;
+                while (ptr.next != null)
+                {
+                    ptr = ptr.next;
+                    prev = ptr;
+                }
+                ptr.next = new Node(data);
+                ptr.next.previous = prev;
+            }
+        }
+
+        /// <summary>
+        /// Delete specific element by value
+        /// </summary>
+        /// <param name="element"></param>
+        public bool Delete(T element)
+        {
+            Node ptr = this.root;
+            Node prev = this.root;
+
+            while (ptr.value.CompareTo(element) != 0)
+            {
+                prev = ptr;
+                if (ptr.next == null)
+                {
+                    return false;
+                }
+                ptr = ptr.next;
+            }
+            prev.next = ptr.next;
+            ptr.next.previous = prev;
+
+            return true;
+        }
+        /// <summary>
+        /// Delete last from the end element
+        /// </summary>
+        /// <returns></returns>
+        public T Delete()
+        {
+            Node ptr = this.root;
+            Node prev = this.root;
+
+            while (ptr.next != null)
+            {
+                prev = ptr;
+                ptr = ptr.next;
+            }
+            prev.next = null;
+            return ptr.value;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class CircularLinkedList<T> : ICustomCollection<T> where T : IComparable<T>
+    {
+        public Node root;
+        public class Node
+        {
+            public T value;
+            public Node next;
+            public Node previous;
+            public Node ptrTofirst;
+
+            public Node(T value)
+            {
+                this.value = value;
+                next = null;
+                previous = null;
+                ptrTofirst = null;
+            }
+        }
+
+        public CircularLinkedList()
+        {
+            this.root = null;
+        }
+        public CircularLinkedList(T value)
+        {
+            Add(value);
+        }
+
+        public void AddToTheStart(T value)
+        {
+            var oldroot = this.root;
+            this.root = new Node(value);
+            this.root.next = oldroot;
+            oldroot.previous = this.root;
+
+            Node ptr = this.root;
+
+            while (ptr.next != null)
+            {
+                ptr = ptr.next;
+            }
+            ptr.ptrTofirst = this.root;
+
+        }
+
+        private bool IsLast(Node node)
+        {
+            if (node.next == null)
+                return true;
+            return false;
+        }
+
+
+        /// <summary>
+        /// Add element to double linked list (in the "end")
+        /// </summary>
+        /// <param name="data"></param>
+        public void Add(T data)
+        {
+            if (this.root == null)
+            {
+                this.root = new Node(data);
+            }
+            else
+            {
+                Node ptr = this.root;
+                Node prev = this.root;
+                while (ptr.next != null)
+                {
+                    ptr = ptr.next;
+                    prev = ptr;
+                }
+                ptr.ptrTofirst = null;
+                ptr.next = new Node(data);
+                ptr.next.ptrTofirst = this.root;
+                ptr.next.previous = prev;
+            }
+        }
+
+        /// <summary>
+        /// Delete specific element by value
+        /// </summary>
+        /// <param name="element"></param>
+        public bool Delete(T element)
+        {
+            Node ptr = this.root;
+            Node prev = this.root;
+
+            while (ptr.value.CompareTo(element) != 0)
+            {
+                prev = ptr;
+                if (ptr.next == null)
+                {
+                    return false;
+                }
+                ptr = ptr.next;
+            }
+            prev.next = ptr.next;
+            ptr.next.previous = prev;
+
+            if (!IsLast(ptr))
+            {
+                while (ptr.next != null)
+                {
+                    ptr = ptr.next;
+                }
+                ptr.ptrTofirst = this.root;
+            }
+            else
+            {
+                ptr.ptrTofirst = this.root;
+            }
+
+            return true;
+        }
+        /// <summary>
+        /// Delete last from the end element
+        /// </summary>
+        /// <returns></returns>
+        public T Delete()
+        {
+            Node ptr = this.root;
+            Node prev = this.root;
+
+            while (ptr.next != null)
+            {
+                prev = ptr;
+                ptr = ptr.next;
+            }
+            prev.next = null;
+
+            if (IsLast(prev))
+            {
+                prev.ptrTofirst = this.root;
+            }
+
+            return ptr.value;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
