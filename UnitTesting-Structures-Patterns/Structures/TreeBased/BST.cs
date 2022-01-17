@@ -27,13 +27,13 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
                     return root;
                 }
 
-                if (key.CompareTo(root.key) < 0)
+                if (key.CompareTo(root.key) == -1)
                 {
                     root.left = InsertKey(root.left, key);
                 }
                 else
                 {
-                    if (key.CompareTo(root.key) > 0)
+                    if (key.CompareTo(root.key) == 1)
                         root.right = InsertKey(root.right, key);
                 }
                 return root;
@@ -146,7 +146,7 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
             if (root != null)
             {
                 if (value.CompareTo(root.key) == 0) return root;
-                if (value.CompareTo(root.key) < 0) return Find(value, root.left);
+                if (value.CompareTo(root.key) == -1) return Find(value, root.left);
                 else
                 {
                     return Find(value, root.right);
@@ -176,12 +176,12 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
         {
             if (root == null) return root;
 
-            if (key.CompareTo(root.key) < 0)
+            if (key.CompareTo(root.key) == -1)
             {
                 root.left = Remove(root.left, key);
 
             }
-            else if (key.CompareTo(root.key) > 0)
+            else if (key.CompareTo(root.key) == 1)
             {
                 root.right = Remove(root.right, key);
             }
@@ -229,6 +229,125 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
         }
 
         public T Delete()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class MyBst : ICustomCollection<int>
+    {
+        public class Node
+        {
+            internal int data;
+            internal Node left, right;
+
+            public Node(int value)
+            {
+                data = value;
+                left = right = default;
+            }
+
+            internal void Insert(Node root, int value)
+            {
+                if (root.data == default)
+                {
+                    root.data = value;
+                }
+                if (value > root.data)
+                {
+                    root.right.data = value;
+                }
+                if (value < root.data)
+                {
+                    root.left.data = value;
+                }
+            }
+        }
+
+        public Node root;
+        public MyBst()
+        {
+            root = null;
+        }
+
+        private int Find(Node root, int value)
+        {
+            if (root == null)
+            {
+                return -1;
+            }
+            if (value == root.data)
+            {
+                return root.data;
+            }
+            if (value < root.data)
+            {
+                Find(root.left, value);
+            }
+            if (value > root.data)
+            {
+                Find(root.right, value);
+            }
+            return -1;
+        }
+
+        private Node Insert(Node root, int value)
+        {
+            if (root == null)
+            {
+                root.data = value;
+            }
+            if (value > root.data)
+            {
+                root.right = Insert(root.right, value);
+            }
+            if (value < root.data)
+            {
+                root.left = Insert(root.left, value);
+            }
+            return root;
+        }
+
+        private Node Remove(Node root, int value)
+        {
+            if (root == null)
+            {
+                return root;
+            }
+            if (value > root.data)
+            {
+                Remove(root.right, value);
+            }
+            if (value < root.data)
+            {
+                Remove(root.left, value);
+            }
+            else
+            {
+
+            }
+            return default;
+        }
+
+
+
+
+        public void Add(int data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<int> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
         }
