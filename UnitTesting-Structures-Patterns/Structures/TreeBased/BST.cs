@@ -246,22 +246,6 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
                 data = value;
                 left = right = default;
             }
-
-            internal void Insert(Node root, int value)
-            {
-                if (root.data == default)
-                {
-                    root.data = value;
-                }
-                if (value > root.data)
-                {
-                    root.right.data = value;
-                }
-                if (value < root.data)
-                {
-                    root.left.data = value;
-                }
-            }
         }
 
         public Node root;
@@ -324,12 +308,29 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
             }
             else
             {
+                if (root.left == null)
+                    return root.right;
+                else if (root.right == null)
+                    return root.left;
 
+                root.data = MinValue(root.right);
+                root.right = Remove(root.right, root.data);
             }
             return default;
         }
 
+        private int MinValue(Node root)
+        {
+            var min = root.data;
 
+            while (root.left != null)
+            {
+                min = root.left.data;
+                root = root.left;
+            }
+
+            return min;
+        }
 
 
         public void Add(int data)

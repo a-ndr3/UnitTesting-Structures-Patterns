@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnitTesting_Structures_Patterns.Interfaces;
+using UnitTesting_Structures_Patterns.Structures.TreeBased;
 
 namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
 {
@@ -11,9 +14,154 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
     /// This one is based on heap because it's more efficient.
     /// Time for insert: o(1) to logN depend on the height
     /// </summary>
-    public class Heap<T> where T : IComparable
+    public class Heap<T> : ICustomCollection<T> where T : IComparable
     {
+        public Node root;
+        public class Node
+        {
+            public T data;
+            public Node left, right;
+            public Node(T data)
+            {
+                this.data = data;
+                left = right = default;
+            }
+            public Node()
+            {
+                this.data = default;
+                left = right = default;
+            }
 
+            /// <summary>
+            /// Inserts element into Heap. Requires Heapify after inserting to get a heap.
+            /// </summary>
+            /// <param name="root"></param>
+            /// <param name="data"></param>
+            /// <returns></returns>
+            internal static Node Insert(Node root, T data)
+            {
+                if (root == null)
+                {
+                    root = new Node(data);
+                    return root;
+                }
+                if (data.CompareTo(root.data) == 1)
+                {
+                    root.right = Insert(root.right, data);
+                }
+                if (data.CompareTo(root.data) == -1)
+                {
+                    root.left = Insert(root.left, data);
+                }
+                if (data.CompareTo(root.data) == 0)
+                {
+                    root.left = Insert(root.left, data);
+                }
+
+                return root;
+            }
+
+            internal static Node<T> Heapify(Node root)
+            {
+                var list = new List<T>();
+
+                TraverseInOrderArray(root, list);
+
+                CompleteBinaryTree<T> cbt = new CompleteBinaryTree<T>(list);
+
+                return cbt.root;
+            }
+
+            private static void TraverseInOrderArray(Node root, List<T> temp)
+            {
+                if (root != null)
+                {
+                    TraverseInOrderArray(root.left, temp);
+                    temp.Add(root.data);
+                    TraverseInOrderArray(root.right, temp);
+
+                }
+            }
+
+        }
+
+        public Heap()
+        {
+            root = null;
+        }
+
+        /// <summary>
+        /// Returns the root of the created heap(min)
+        /// </summary>
+        /// <returns></returns>
+        public Node<T> GetHeap()
+        {
+            return Node.Heapify(this.root);
+        }
+
+        public void Add(T data)
+        {
+            root = Node.Insert(root, data);
+        }
+
+        private Node Remove(Node root, T value)
+        {
+            if (root == null)
+            {
+                return root;
+            }
+            if (value.CompareTo(root.data) == 1)
+            {
+                Remove(root.right, value);
+            }
+            if (value.CompareTo(root.data) == -1)
+            {
+                Remove(root.left, value);
+            }
+            else
+            {
+                if (root.left == null)
+                    return root.right;
+                else if (root.right == null)
+                    return root.left;
+
+                root.data = MinValue(root.right);
+                root.right = Remove(root.right, root.data);
+            }
+            return default;
+        }
+
+        private T MinValue(Node root)
+        {
+            var min = root.data;
+
+            while (root.left != null)
+            {
+                min = root.left.data;
+                root = root.left;
+            }
+
+            return min;
+        }
+
+        public void Delete(T value)
+        {
+            Remove(this.root, value);
+        }
+        public T Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class MyHeap : IEnumerable
