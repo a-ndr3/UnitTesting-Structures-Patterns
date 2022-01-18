@@ -17,6 +17,7 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
     public class Heap<T> : ICustomCollection<T> where T : IComparable
     {
         public Node root;
+        public Node<T> heapRoot;
         public class Node
         {
             public T data;
@@ -61,16 +62,28 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
                 return root;
             }
 
-            internal static Node<T> Heapify(Node root)
+            internal static Node<T> Heapify(Node root, List<T> list = null)
             {
-                var list = new List<T>();
+                if (list == null)
+                {
+                    list = new List<T>();
 
-                TraverseInOrderArray(root, list);
+                    TraverseInOrderArray(root, list);
 
-                CompleteBinaryTree<T> cbt = new CompleteBinaryTree<T>(list);
+                    CompleteBinaryTree<T> cbt = new CompleteBinaryTree<T>(list);
 
-                return cbt.root;
+                    return cbt.root;
+                }
+                else
+                {
+                    TraverseInOrderArray(root, list);
+
+                    CompleteBinaryTree<T> cbt = new CompleteBinaryTree<T>(list);
+
+                    return cbt.root;
+                }
             }
+
 
             private static void TraverseInOrderArray(Node root, List<T> temp)
             {
@@ -88,6 +101,7 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
         public Heap()
         {
             root = null;
+            heapRoot = null;
         }
 
         /// <summary>
@@ -96,7 +110,16 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
         /// <returns></returns>
         public Node<T> GetHeap()
         {
-            return Node.Heapify(this.root);
+            heapRoot = Node.Heapify(this.root);
+            this.root = null;
+            return heapRoot;
+        }
+
+        public Node<T> GetHeap(List<T> items)
+        {
+            this.root = null;
+            heapRoot = Node.Heapify(this.root, items);
+            return heapRoot;
         }
 
         public void Add(T data)
@@ -104,53 +127,18 @@ namespace UnitTesting_Structures_Patterns.Structures.BasicStructures
             root = Node.Insert(root, data);
         }
 
-        private Node Remove(Node root, T value)
+        public T Delete()
         {
-            if (root == null)
-            {
-                return root;
-            }
-            if (value.CompareTo(root.data) == 1)
-            {
-                Remove(root.right, value);
-            }
-            if (value.CompareTo(root.data) == -1)
-            {
-                Remove(root.left, value);
-            }
-            else
-            {
-                if (root.left == null)
-                    return root.right;
-                else if (root.right == null)
-                    return root.left;
-
-                root.data = MinValue(root.right);
-                root.right = Remove(root.right, root.data);
-            }
-            return default;
-        }
-
-        private T MinValue(Node root)
-        {
-            var min = root.data;
-
-            while (root.left != null)
-            {
-                min = root.left.data;
-                root = root.left;
-            }
-
-            return min;
+            throw new NotImplementedException();
         }
 
         public void Delete(T value)
         {
-            Remove(this.root, value);
-        }
-        public T Delete()
-        {
-            throw new NotImplementedException();
+            CompleteBinaryTree<T> tree = new CompleteBinaryTree<T>(this.heapRoot);
+            var elements = tree.GetListOfElements(tree);
+
+            elements.Remove(value);
+            GetHeap(elements);
         }
 
         public IEnumerator<T> GetEnumerator()

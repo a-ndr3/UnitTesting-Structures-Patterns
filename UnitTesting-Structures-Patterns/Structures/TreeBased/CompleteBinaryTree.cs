@@ -60,6 +60,7 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
             return GetEnumerator();
         }
     }
+
     /// <summary>
     /// It's a binary tree in which all levels are completely filled, except the lowest or the lowest filled from the left.
     /// Differs from full binary tree: all the leaf elements lean towards left.
@@ -73,12 +74,28 @@ namespace UnitTesting_Structures_Patterns.Structures.TreeBased
 
         public CompleteBinaryTree()
         {
+            root = null;
+        }
 
+        public CompleteBinaryTree(Node<T> root)
+        {
+            this.root = root;
         }
 
         public CompleteBinaryTree(List<T> list)
         {
             root = new Node<T>(list);
+        }
+
+        public List<T> GetListOfElements(CompleteBinaryTree<T> tree)
+        {
+            List<T> list = new List<T>();
+            foreach (var item in tree)
+            {
+                list.Add(item);
+            }
+
+            return list;
         }
 
 
