@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnitTesting_Structures_Patterns.Interfaces;
 using UnitTesting_Structures_Patterns.Structures.BasicStructures;
 using UnitTesting_Structures_Patterns.Structures.TreeBased;
@@ -14,6 +15,7 @@ namespace UnitTestProject
             Stack<string> stack;
             Queue<string> queue;
             BST<string> bst;
+
             public CustomCollectionsOutputTest()
             {
                 stack = new Stack<string>(5);

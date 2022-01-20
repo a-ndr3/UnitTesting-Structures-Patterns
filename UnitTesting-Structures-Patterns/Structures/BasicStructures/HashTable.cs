@@ -12,7 +12,7 @@ namespace UnitTesting_Structures_Patterns.Structures
     public class HashTable<T> : ICustomCollection<T> where T : IComparable
     {
         HashNode[] hashNodes;
-        private readonly int size;
+        private int capacity;
         public class HashNode
         {
             public string key;
@@ -30,12 +30,12 @@ namespace UnitTesting_Structures_Patterns.Structures
 
         public HashTable()
         {
-            size = 10000;
-            hashNodes = new HashNode[size];
+            capacity = 10000;
+            hashNodes = new HashNode[capacity];
         }
         public HashTable(int size)
         {
-            this.size = size;
+            this.capacity = size;
             hashNodes = new HashNode[size];
         }
 
@@ -60,7 +60,7 @@ namespace UnitTesting_Structures_Patterns.Structures
         /// Get hash by using System.HashCode struct
         /// </summary>
         /// <returns></returns>
-        private int GetHashUsingHashCodeStruct(string key)
+        protected int GetHashUsingHashCodeStruct(string key)
         {
             HashCode hashCode = new HashCode();
             hashCode.Add(key);
@@ -69,19 +69,28 @@ namespace UnitTesting_Structures_Patterns.Structures
 
         private void AddCapacity(int index)
         {
-            int capacity = 10000;
+            int capacity = hashNodes.Length;
+
             var lenght = index.ToString().Length;
-            if (index > lenght)
+
+            if (index >= lenght)
             {
-                while (lenght > capacity.ToString().Length)
+                if (lenght > capacity.ToString().Length)
                 {
-                    capacity = capacity * 10;
+                    while (lenght >= capacity.ToString().Length)
+                    {
+                        capacity = capacity * 100;
+                    }
+                }
+                else
+                {
+                    while (index >= capacity)
+                    {
+                        capacity = capacity * 2;
+                    }
                 }
                 Array.Resize(ref hashNodes, capacity);
-            }
-            else if (((hashNodes.Length + 1) >= size))
-            {
-                Array.Resize(ref hashNodes, size * 2);
+                this.capacity = capacity;
             }
         }
 
