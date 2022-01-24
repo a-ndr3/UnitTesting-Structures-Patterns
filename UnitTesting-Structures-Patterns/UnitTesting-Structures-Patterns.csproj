@@ -8,9 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Structures\Dynamic-other\" />
-    <Folder Include="Structures\GraphBased\" />
-    <Folder Include="Structures\Greedy\" />
-    <Folder Include="Structures\Sorting-searching\" />
   </ItemGroup>
 
 </Project>

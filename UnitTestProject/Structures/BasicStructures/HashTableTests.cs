@@ -51,6 +51,7 @@ namespace UnitTestProject.Structures.BasicStructures
         public void GetValueTest_GetsKeys_ReturnsIEnumerableValues(params object[] obj)
         {
             ht.Add(obj[0].ToString(), (int)obj[1]);
+            ht.Add(obj[0].ToString(), 555555);
             //Act
             var res = ht.GetValue(obj[0].ToString());
             //Assert
