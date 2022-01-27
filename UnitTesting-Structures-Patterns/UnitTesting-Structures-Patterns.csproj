@@ -6,8 +6,4 @@
     <RootNamespace>UnitTesting_Structures_Patterns</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Structures\Dynamic-other\" />
-  </ItemGroup>
-
 </Project>
