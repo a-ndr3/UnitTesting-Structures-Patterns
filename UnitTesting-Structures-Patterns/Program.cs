@@ -1,4 +1,4 @@
-﻿using UnitTesting_Structures_Patterns.Structures.Dynamic_other;
+﻿using UnitTesting_Structures_Patterns.Patterns.Creational;
 
 namespace UnitTesting_Structures_Patterns
 {
