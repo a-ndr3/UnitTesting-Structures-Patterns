@@ -29,8 +29,6 @@ namespace UnitTesting_Structures_Patterns.Patterns.Creational
         }
     }
 
-
-
     public enum ModelType
     {
         Samsung1 = 1,
@@ -41,8 +39,13 @@ namespace UnitTesting_Structures_Patterns.Patterns.Creational
         iPhone6 = 6
     }
 
-    public class Samsung1 : IMobile
+    public class Samsung1 : IMobile,IBattery
     {
+        public void GetBattery()
+        {
+            Console.WriteLine("Battery samsung");
+        }
+
         public void GetMobile()
         {
             Console.WriteLine("Samsung1 is here");
@@ -57,8 +60,13 @@ namespace UnitTesting_Structures_Patterns.Patterns.Creational
         }
     }
 
-    public class Sony1 : IMobile
+    public class Sony1 : IMobile,IBattery
     {
+        public void GetBattery()
+        {
+            Console.WriteLine("battery sony");
+        }
+
         public void GetMobile()
         {
             Console.WriteLine("Sony1 is here");
@@ -83,17 +91,24 @@ namespace UnitTesting_Structures_Patterns.Patterns.Creational
     }
 
 
-    public class SamsungFactory : IMobileFactory
+    public class MobileFactory : IMobileFactory
     {
         public override IBattery GetBattery(ModelType type)
         {
             switch (type)
             {
-                case ModelType.Samsung1:
-                    return new SamsungBattery();
-                case ModelType.Samsung2:
-                    return new SamsungBattery();
-                default: return null;
+                case (ModelType.Samsung1):
+                    {
+                        new Samsung1().GetBattery();
+                        return null;
+                    }
+                case (ModelType.Sony1):
+                    {
+                        new Sony1().GetBattery();
+                        return null;
+                    }
+
+                default:return null;
             }
         }
 
@@ -101,41 +116,70 @@ namespace UnitTesting_Structures_Patterns.Patterns.Creational
         {
             switch (type)
             {
-                case ModelType.Samsung1:
+                case (ModelType.Samsung1):
                     return new Samsung1();
-                case ModelType.Samsung2:
-                    return new Samsung2();
-                default: return null;
-            }
-        }
-    }
-
-    public class SonyFactory : IMobileFactory
-    {
-        public override IBattery GetBattery(ModelType type)
-        {
-            switch (type)
-            {
-                case ModelType.Sony1:
-                    return new SonyBattery();
-                case ModelType.Sony2:
-                    return new SonyBattery();
-                default: return null;
-            }
-        }
-
-        public override IMobile GetMobile(ModelType type)
-        {
-            switch (type)
-            {
-                case ModelType.Sony1:
+                case (ModelType.Sony1):
                     return new Sony1();
-                case ModelType.Sony2:
-                    return new Sony2();
+
                 default: return null;
             }
         }
     }
+
+
+    //public class SamsungFactory : IMobileFactory
+    //{
+    //    public override IBattery GetBattery(ModelType type)
+    //    {
+    //        switch (type)
+    //        {
+    //            case ModelType.Samsung1:
+    //                return new SamsungBattery();
+    //            case ModelType.Samsung2:
+    //                return new SamsungBattery();
+    //            default: return null;
+    //        }
+    //    }
+
+    //    public override IMobile GetMobile(ModelType type)
+    //    {
+    //        switch (type)
+    //        {
+    //            case ModelType.Samsung1:
+    //                return new Samsung1();
+    //            case ModelType.Samsung2:
+    //                return new Samsung2();
+    //            default: return null;
+    //        }
+    //    }
+    //}
+
+    //public class SonyFactory : IMobileFactory
+    //{
+    //    public override IBattery GetBattery(ModelType type)
+    //    {
+    //        switch (type)
+    //        {
+    //            case ModelType.Sony1:
+    //                return new SonyBattery();
+    //            case ModelType.Sony2:
+    //                return new SonyBattery();
+    //            default: return null;
+    //        }
+    //    }
+
+    //    public override IMobile GetMobile(ModelType type)
+    //    {
+    //        switch (type)
+    //        {
+    //            case ModelType.Sony1:
+    //                return new Sony1();
+    //            case ModelType.Sony2:
+    //                return new Sony2();
+    //            default: return null;
+    //        }
+    //    }
+    //}
 
 
 }
