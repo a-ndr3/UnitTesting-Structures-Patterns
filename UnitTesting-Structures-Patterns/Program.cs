@@ -1,13 +1,12 @@
-﻿using UnitTesting_Structures_Patterns.Patterns.Creational;
-
-namespace UnitTesting_Structures_Patterns
+﻿namespace UnitTesting_Structures_Patterns
 {
     class Program
     {
-        static void Main(string[] args)
-        { 
-           
-          
+        public static void Main(string[] args)
+        {
+
+
         }
+
     }
 }
