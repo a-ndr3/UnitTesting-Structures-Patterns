@@ -137,20 +137,18 @@ namespace UnitTesting_Structures_Patterns.Patterns.Structural
 
     //composite var 3
 
-    public interface GraphicShapes
+    public interface IAddShapes
     {
         public void Add(GraphicShapes shape);
+    }
 
+    public interface GraphicShapes
+    {
         public string GetShapes();
     }
 
     public class AlmostSquare : GraphicShapes
     {
-        public void Add(GraphicShapes shape)
-        {
-            
-        }
-
         public string GetShapes()
         {
             return "Almostsquare";
@@ -159,18 +157,13 @@ namespace UnitTesting_Structures_Patterns.Patterns.Structural
 
     public class NotSquare : GraphicShapes
     {
-        public void Add(GraphicShapes shape)
-        {
-
-        }
-
         public string GetShapes()
         {
             return "Notsquare";
         }
     }
 
-    public class CompositeShape : GraphicShapes
+    public class CompositeShape : GraphicShapes,IAddShapes
     {
         private Lazy<List<GraphicShapes>> childrenShapes = new Lazy<List<GraphicShapes>>();
         public List<GraphicShapes> children => childrenShapes.Value;
